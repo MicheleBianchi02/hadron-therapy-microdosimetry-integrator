@@ -186,12 +186,7 @@ class SettingWindow(QWidget):
                 "manufacturer": "Software Emulation",
                 "device": "SIMULATOR",
             }
-            fake_port = {
-                "name": "PIC18",
-                "description": "Microcontroller",
-                "manufacturer": "Microchip",
-                "device": "SIMULATOR",
-            }
+
             port_list.insert(0, fake_port)
 
         # Populate Table
@@ -273,10 +268,9 @@ class SettingWindow(QWidget):
         custom_message = ""
 
         if self.simulate:
-            if self.selected_port == "PIC18":
+            if self.selected_port == "Simulated Port":
                 connection_ok = True
                 custom_message = "Simulation connection established."
-                custom_message = "PIC18 connection established."
             else:
                 connection_ok = False
                 custom_message = "Simulation error: Wrong port selected."

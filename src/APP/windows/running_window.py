@@ -576,7 +576,6 @@ class RunningWindow(QWidget):
             new_data = []
 
         measure_time = round((time.time() - self.starting_time), 1)
-        measure_time = round( self.ptr/current_session.sample_freq,1)
         if update_time:
             self.measuring_time_label.setText(f"{measure_time} s")
 

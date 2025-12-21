@@ -312,6 +312,8 @@ class SetupWindow(QWidget):
 
 
 
+# QStackedWidget set the width of all the widgets inside it to the 
+# the width of the biggest widget
 class DynamicStackedWidget(QStackedWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
