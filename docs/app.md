@@ -9,9 +9,14 @@ This application provides a graphical interface for controlling a microcontrolle
     - [Data Flow & Processing](#data-flow--processing)
     - [Architecture Pattern](#architecture-pattern)
 - [Memory Management (Critical)](#memory-management-critical)
-    - [Current Limitations](#current-limitations)
+    - [Current Limitations](#current-usage-metrics)
     - [Path to Memory Safety](#path-to-memory-safety)
-- [Extensibility](#extensibility)
+- [Installation & Development](#installation--development)
+	- [Prerequisite](#prerequisites)
+	- [Windows Guide](#setting-up-the-environment-windows-guide)
+- [Building for Distribution](#building-for-distribution)
+- [Licensing](#licensing)
+- [Extensibility](#extensibility) 
 - [Roadmap & TODOs](#roadmap--todos)
 
 ---
@@ -26,6 +31,10 @@ This application provides a graphical interface for controlling a microcontrolle
     - **Operational Mode:** Streams calculated differences (efficient).
     - **Debug Mode:** Streams start/stop timer values for deep hardware analysis (verbose).
 - **Data Persistence:** Save data to CSV or load previous sessions.
+- **Cross-Platform:** The application is built on Python and PyQt6, making it fully compatible with **Windows, macOS, and Linux**. It is not tied to any specific operating system.
+
+
+
 
 ---
 
@@ -93,12 +102,99 @@ To convert this into a memory-safe application capable of running for days, the 
 
 ---
 
+## Installation & Development
+
+This section explains how to run the application from the source code. This is useful if you want to modify the logic or if the pre-built executable does not work on your specific machine.
+
+### Prerequisites
+The application relies on the following open-source libraries:
+- **PyQt6:** For the Graphical User Interface.
+- **PyQtGraph:** For high-performance real-time plotting.
+- **NumPy:** For efficient array manipulation and statistical calculations.
+- **PySerial:** For communication with the microcontroller.
+
+### Setting up the Environment (Windows Guide)
+If you are new to Python development, follow these steps to set up a "Virtual Environment." This keeps your project isolated from other Python projects.
+
+1.  **Install Python:** Download and install Python (version 3.10 or newer) from [python.org](https://www.python.org/). Ensure you check **"Add Python to PATH"** during installation.
+
+2.  **Open the Terminal:** Open Command Prompt (cmd) or PowerShell and navigate to the project folder.
+
+3.  **Create a Virtual Environment:**
+    ```bash
+    python -m venv venv
+    ```
+
+4.  **Activate the Environment:**
+    ```bash
+    .\venv\Scripts\activate
+    ```
+    *(You will see `(venv)` appear at the start of your command line).*
+
+5.  **Install Dependencies:**
+    Run the following command to install all required libraries:
+    ```bash
+    pip install pyqt6 pyqtgraph numpy pyserial
+    ```
+
+6.  **Run the Application:**
+    You can now launch the app using:
+    ```bash
+    python app.py
+    ```
+
+---
+
+## Building for Distribution
+
+To share the application with users who do not have Python installed, you can compile it into a standalone executable using **PyInstaller**.
+
+### 1. Install PyInstaller
+Ensure your virtual environment is active, then install the builder:
+```bash
+pip install pyinstaller
+```
+
+### 2. Build Command
+
+Run the following command to generate the executable. This command bundles all dependencies and specifically collects the necessary dynamic libraries for the UI and Math modules:
+```bash
+python -m PyInstaller --onefile --windowed --icon=app_icon.ico --name MicroDosimeter --collect-all PyQt6 --collect-all numpy --collect-all pyqtgraph app.py
+```
+
+
+### 3. Understanding the Build Output
+
+-   **Startup Time:** The `--onefile` flag creates a single `.exe` file that is easy to share. However, every time you run it, it must "unzip" all bundled files into a temporary directory. This causes a **slow startup** (several seconds).
+    
+-   **Alternative (`--onedir`):** If startup speed is a priority, replace `--onefile` with `--onedir` in the command above. This creates a folder containing the `.exe` and all dependencies visible. It starts instantly but is "messier" to distribute.
+    
+
+### 4. Important Note on Drivers (PySerial)
+
+The `pyserial` library relies on OS-specific drivers to communicate with hardware ports. The standalone executable assumes standard drivers are present on the user's machine.
+
+-   If the executable fails to detect the COM ports, it is likely due to missing dynamic driver links in the frozen environment.
+    
+-   **Solution:** In this case, it is advised to run the application **from source** (see [Installation & Development](#installation--development)) on the target machine.
+    
+
+----------
+
+## Licensing
+
+All libraries used in this project (`PyQt6`, `PyQtGraph`, `NumPy`, `PySerial`) are **Open Source** and free to use.
+
+-   **PyQt6** is licensed under the **GPL v3**. This means you can distribute this application for free. However, if you intend to sell this software, you must either purchase a commercial license from Riverbank Computing or release your own source code under the GPL.
+
+---
+
 ## Extensibility
 
 The application is designed to be hardware-agnostic regarding the UI. 
 
 **Replacing the Microcontroller:**
-If you switch to a new MCU (e.g., FPGA or faster ARM chip) with significantly higher data rates (>2MHz):
+If you switch to a new MCU (e.g., FPGA or faster ARM chip) with significantly higher data rates (>2kHz):
 1.  **UI Preservation:** The PyQt interface (`RunningWindow`, `TimeWindow`) requires little to no changes.
 2.  **Backend Update:** You only need to rewrite `serial_comm.py` and `utils.py`.
 3.  **Performance:** For extremely high data rates, the Python serial thread might become a bottleneck. The backend logic can be rewritten in **C** and exposed to Python as a shared library, while keeping the UI in Python.
@@ -113,7 +209,7 @@ If you switch to a new MCU (e.g., FPGA or faster ARM chip) with significantly hi
 - [ ] **Refactor Data Loading:** Implement chunked loading for large historical files.
 
 ### Features
-- [ ] **Physics Calibration:** Add settings to input detector sensitivity, allowing the display of **Energy (keV/MeV)** directly instead of Charge (pC) or Channel ID.
+- [ ] **Physics Calibration:** Add settings to input detector sensitivity, allowing the display of **Energy (keV)** directly instead of Charge (pC) or Channel ID.
 - [ ] **Advanced Analysis:** Add support for multiple Regions of Interest (ROI) on the histogram.
 - [ ] **Auto-Stop:** Add a "Stop after X seconds" or "Stop after X counts" feature.
 
