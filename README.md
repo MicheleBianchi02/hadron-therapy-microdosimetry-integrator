@@ -61,6 +61,10 @@ only **0.3%** when reconstructing combined stochastic processes.
 We developed a custom software application to interface with the hardware, providing
 real-time data acquisition, control, and statistical analysis.
 
+https://github.com/user-attachments/assets/456dde1a-2007-44d5-bbb5-85a7f0f38553
+
+Additional details about the application are provided in the documentation [here](docs/app.md).
+
 
 ## Authors
 
@@ -73,3 +77,7 @@ This project was a collaborative effort by:
 
 We would like to thank the **INFN** and the **ATOMIQA** project team for providing the
 framework for this research, and our professors at **Politecnico di Milano** for their support.
+
+
+
+
