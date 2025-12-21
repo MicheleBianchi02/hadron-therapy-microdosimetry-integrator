@@ -3,6 +3,7 @@
 This application provides a graphical interface for controlling a microcontroller-based microdosimeter, streaming high-frequency data (2mHz to 2kHz), and performing real-time statistical analysis. It features live data visualization via time-series plots and multichannel analysis (histograms), along with real-time variance calculation.
 
 ## Table of Contents
+- [Download](#download)
 - [Features](#features)
 - [Technical Architecture](#technical-architecture)
     - [Threading & Concurrency](#threading--concurrency)
@@ -18,6 +19,16 @@ This application provides a graphical interface for controlling a microcontrolle
 - [Licensing](#licensing)
 - [Extensibility](#extensibility) 
 - [Roadmap & TODOs](#roadmap--todos)
+
+---
+
+
+## Download
+
+You can download the latest pre-compiled executable (for Windows) directly from the GitHub Releases page. No Python installation is required to use these files.
+
+[**Download Latest Version**](https://github.com/MicheleBianchi02/hadron-therapy-microdosimetry-integrator/releases/latest)
+
 
 ---
 
