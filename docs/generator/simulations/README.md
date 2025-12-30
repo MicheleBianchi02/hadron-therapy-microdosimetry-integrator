@@ -4,6 +4,7 @@ This repository contains a statistical simulation of nuclear pulse generation us
 ## Overview
 
 When generating random pulses to emulate nuclear decay events, ideal theoretical models assume continuous time and zero processing delay. However, microcontroller implementations introduce two specific constraints:
+
 - **Dead Time ($T_{\text{dead}}$)**: The minimum time required to process a pulse. In this implementation, a fixed dead time of $300 μs$ is introduced (simulated via signal clipping).
 
 - **Discretization ($T_{\text{clock}}$​)**: The ESP-32 `delayMicroseconds` function forces time intervals to be integers. This creates a discrete time domain with a step size of $1μs$.
@@ -22,7 +23,7 @@ The Python script [`stat.py`](stat.py) performs the following steps:
 	- $P(t<300μs)=0$
 	- $P(t=300μs)$ is artificially inflated (probability pile-up).
 
-- **Analysis**: The script calculates the resulting mean event rates, variances, and counting distributions for various target $T_{\text{s}}$​.
+4) **Analysis**: The script calculates the resulting mean event rates, variances, and counting distributions for various target $T_{\text{s}}$​.
 
 ## Results and Analysis
 
@@ -79,10 +80,10 @@ To determine the safe operating range, a sweep over mean inter-arrival times ($T
 
 - **Transition**: The error drops as Ts​ increases.
 
-- **Suggestion**: For a system with a $300μs$ dead time, a mean period of $30000–40000μs$ (or higher) is recommended to ensure the generated pulses adhere to standard Poisson statistics without significant correction. If the dead time is decreased, these values reduces accordingly. 
+- **Suggestion**: For a system with a $300μs$ dead time, a mean period of $30000 \- 40000μs$ (or higher) is recommended to ensure the generated pulses adhere to standard Poisson statistics without significant correction. If the dead time is decreased, these values reduces accordingly. 
 
 - **Notes**: In the real waveform generator (ESP-32), the dead time is not constant. Instead, it depends on the statistics of the generated pulses and on the time required to generate a random number, which is not constant on this device.
-  Consequently, if we assume that the generated pulse has a Gaussian shape in the time domain, the resulting dead-time distribution is also expected to be Gaussian. The total number of generated elements still exhibits the behavior shown previously,
+  Consequently, if we assume that the generated pulse has a Gaussian shape in the time domain, the resulting dead-time distribution is also expected to be Gaussian. The total number of generated events still exhibits the behavior shown previously,
   as it follows the mean of the distribution. However, the estimated standard deviation becomes slightly larger for values of $T_{\text{s}}$.
 	​
 
