@@ -67,6 +67,14 @@ For $T_{\text{s}}=800μs$, the ratios approach an asymptotic value **not equal t
 
 *Figure 4: Convergence of measured/theoretical ratios for* $T_{\text{s}}=10000μs$.
 
+Notice that the theoretical number of events is obtained by varying the measuring time.
+The figure below shows the behaviour of the generated $T_{\text{s}}$ and $n$ for a
+fixed measuring time.
+
+<img width="1646" height="691" alt="fig_fixed_t_meas" src="https://github.com/user-attachments/assets/af3a2d45-9955-4898-ace7-a319824fd017" />
+
+
+*Figure 5:* $n$ *and* $T_{\text{s}}$ *for a fixed measuring time*.
 
 ### 4. Operating Range Sweep
 
@@ -74,7 +82,7 @@ To determine the safe operating range, a sweep over mean inter-arrival times ($T
 
 <img width="1493" height="908" alt="period" src="https://github.com/user-attachments/assets/c052d1a2-1719-4e7c-a9ac-8aed3a2c2a13" />
 
-*Figure 5: Relative error of Mean and Variance vs.* $T_{\text{s}}$​.
+*Figure 6: Relative error of Mean and Variance vs.* $T_{\text{s}}$​.
 
 - **Low $T_{\text{s}}$**: The error is massive due to the dominance of the dead time.
 
