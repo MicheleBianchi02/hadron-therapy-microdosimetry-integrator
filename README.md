@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/1120284350.svg)](https://doi.org/10.5281/zenodo.24271794)
 # Current Integrator for Microdosimetry in Clinical Hadron Therapy
 
 This repository contains the design, firmware, and validation of a custom
