@@ -1,0 +1,12 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Bianchi"
+    given-names: "Michele"
+  - family-names: "Alberto"
+    given-names: "Allegretti"
+title: "Hadron Therapy Microdosimetry Integrator"
+version: 1.0.0
+date-released: 2026-11-16
+repository-code: "https://github.com/MicheleBianchi02/hadron-therapy-microdosimetry-integrator"
+url: "https://github.com/MicheleBianchi02/hadron-therapy-microdosimetry-integrator"
